@@ -22,5 +22,10 @@ class UserService {
     const user = await userModel.findOne({ email: data.email });
     return user;
   }
+
+  async deletebyId(id) {
+    const user = await userModel.findByIdAndDelete(id);
+    return user;
+  }
 }
 export default new UserService();

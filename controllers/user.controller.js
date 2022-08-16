@@ -25,7 +25,7 @@ class UserController {
     }
     await userService.create(data);
 
-    return res.status(201).send({
+    return res.status(200).send({
       success: true,
       message: 'user created successfully',
       body: data
@@ -80,7 +80,16 @@ class UserController {
       body: found
     });
   }
-  async deleteUser(req, res) {}
+
+  async deleteUser(req, res) {
+    const deleted = await userService.deletebyId(req.body.id);
+    if (_.isEmpty(deleted)) {
+      res.status(200).send({
+        success: true,
+        message: 'User deleted successfully'
+      });
+    }
+  }
 }
 
 export default new UserController();
