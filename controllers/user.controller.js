@@ -5,7 +5,7 @@
 import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import userService from '../services/user.service.js';
+import userService from '../services/user.services.js';
 
 class UserController {
   async createUser(req, res) {
@@ -65,6 +65,22 @@ class UserController {
       body: { ...users }
     });
   }
+
+  async findUser(req, res) {
+    const found = await userService.findByEmail(req.body.email);
+    if (_.isEmpty(found)) {
+      return res.status(404).send({
+        success: true,
+        message: 'No user with that email was found'
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'User found',
+      body: found
+    });
+  }
+  async deleteUser(req, res) {}
 }
 
 export default new UserController();
