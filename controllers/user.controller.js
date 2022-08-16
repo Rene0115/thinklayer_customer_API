@@ -58,7 +58,7 @@ class UserController {
     });
   }
 
-  async fetchUsers(req, res) {
+  async fetchAllUsers(req, res) {
     const users = await userService.getAllUsers();
     return res.status(200).send({
       success: true,
