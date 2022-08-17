@@ -19,5 +19,9 @@ class UserValidator {
       .string()
       .required()
   });
+
+  deleteUserSchema = Joi.object({
+    id: Joi.string().required()
+  });
 }
 export default new UserValidator();
