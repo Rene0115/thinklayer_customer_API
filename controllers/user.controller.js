@@ -84,11 +84,15 @@ class UserController {
   async deleteUser(req, res) {
     const deleted = await userService.deletebyId(req.body.id);
     if (_.isEmpty(deleted)) {
-      res.status(200).send({
-        success: true,
-        message: 'User deleted successfully'
+      res.status(400).send({
+        success: false,
+        message: 'User does not exist'
       });
     }
+    return res.status(200).send({
+      success: true,
+      message: 'User deleted successfully'
+    });
   }
 }
 
