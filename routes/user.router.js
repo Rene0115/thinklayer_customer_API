@@ -9,7 +9,7 @@ const userRouter = express.Router();
 userRouter.get('/', userController.fetchAllUsers);
 userRouter.post('/signup', [validator(validateUserSchema)], userController.createUser);
 userRouter.post('/login', [validator(validateUserSchema)], userController.loginUser);
-listRouter.delete('/delete', [validator(listValidator.deleteListSchema), authentication], listController.deleteList);
+userRouter.delete('/delete', [validator(listValidator.deleteListSchema), authentication], userController.deleteUser);
 userRouter.get('/find', userController.findUser);
 
 export default userRouter;

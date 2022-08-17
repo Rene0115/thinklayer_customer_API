@@ -20,4 +20,4 @@ class UserValidator {
       .required()
   });
 }
-export default validateUserSchema;
+export default new UserValidator();
