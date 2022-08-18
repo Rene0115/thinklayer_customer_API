@@ -86,9 +86,9 @@ class UserController {
   }
 
   async findUser(req, res) {
-    const found = await userService.findByEmail(req.body.email);
+    const found = await userService.findByEmail(req.body);
     if (_.isEmpty(found)) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: true,
         message: 'No user with that email was found'
       });
