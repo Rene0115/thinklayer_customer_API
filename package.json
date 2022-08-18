@@ -40,5 +40,12 @@
     "nodemon": "^2.0.19",
     "pino": "^8.3.1"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "engines": {
+    "node": "16.15.1"
+  },
   "type": "module"
 }
