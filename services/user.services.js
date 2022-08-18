@@ -23,6 +23,11 @@ class UserService {
     return user;
   }
 
+  async findPhoneNumber(data) {
+    const number = await userModel.findOne({ phone: data.phone });
+    return number;
+  }
+
   async deletebyId(id) {
     const user = await userModel.findByIdAndDelete(id);
     return user;

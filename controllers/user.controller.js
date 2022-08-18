@@ -16,11 +16,24 @@ class UserController {
         message: 'User already exists'
       });
     }
-    const data = { email: req.body.email, password: bcrypt.hashSync(req.body.password, 8) };
+    const num = await userService.findPhoneNumber(req.body);
+    if (!_.isEmpty(num)) {
+      return res.status(400).send({
+        success: false,
+        message: 'Phone number already exists'
+      });
+    }
+
+    const data = {
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+      phone: req.body.phone,
+      name: req.body.name
+    };
     if (_.isEmpty(data)) {
       return res.status(404).send({
         success: false,
-        message: 'User cannot be created without an email and a password'
+        message: 'User cannot be created without an email,password and phone number'
       });
     }
     await userService.create(data);
@@ -60,9 +73,15 @@ class UserController {
 
   async fetchAllUsers(req, res) {
     const users = await userService.getAllUsers();
+    if (_.isEmpty(users)) {
+      return res.status(200).send({
+        success: true,
+        message: 'Users have not been created'
+      });
+    }
     return res.status(200).send({
       success: true,
-      body: { ...users }
+      body: users
     });
   }
 
